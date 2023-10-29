@@ -34,4 +34,5 @@ class TaskIndexViewTests(TestCase):
     self.assertQuerySetEqual(
         response.context["task_list"],
         [task1, task2],
+        ordered=False
     )

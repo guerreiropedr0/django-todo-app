@@ -1,4 +1,8 @@
 from django.http import HttpResponse
+from django.views import generic
 
-def index(request):
-  return HttpResponse("Hello World")
+from .models import Task
+
+class IndexView(generic.ListView):
+  template_name = "todos/index.html"
+  model = Task

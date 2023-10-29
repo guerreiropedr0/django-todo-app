@@ -1,9 +1,13 @@
-{% if task_list %}
-    <ul>
-    {% for task in task_list %}
-        <li>{{ task }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No todos are available.</p>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+  {% if task_list %}
+      <ul>
+      {% for task in task_list %}
+          <li>{{ task }}</li>
+      {% endfor %}
+      </ul>
+  {% else %}
+      <p>No todos are available.</p>
+  {% endif %}
+{% endblock content %}

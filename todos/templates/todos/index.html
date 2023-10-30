@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <form action="{% url 'todos:create' %}" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="mb-3">
+        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
   {% if task_list %}
       <ul>
       {% for task in task_list %}
@@ -11,3 +23,9 @@
       <p>No todos are available.</p>
   {% endif %}
 {% endblock content %}
+
+{% comment %} TODO: Add deadline {% endcomment %}
+<div class="mb-3">
+  <label for="task_deadline" class="form-label">Task Deadline</label>
+  <input type="date" class="form-control" id="task_deadline" name="task_deadline">
+</div>

@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form hx-post="{% url 'todos:create' %}" hx-target="#task_list" hx-swap="beforeend">
+  <form
+    hx-post="{% url 'todos:create' %}"
+    hx-target="#task_list"
+    hx-swap="beforeend"
+    hx-on::after-request="if(event.detail.successful) this.reset()"
+  >
     {% csrf_token %}
 
     {% for field in form %}

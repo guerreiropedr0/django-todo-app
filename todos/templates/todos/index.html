@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form action="{% url 'todos:create' %}" method="post">
+  <form hx-post="{% url 'todos:create' %}" hx-target="#task_list" hx-swap="beforeend">
     {% csrf_token %}
 
     {% for field in form %}
@@ -14,10 +14,11 @@
   </form>
 
   {% if task_list %}
-      <ul>
+      <ul id="task_list">
       {% for task in task_list %}
-          <li>{{ task }}</li>
+        {% include 'snippets/task.html' %}
       {% endfor %}
+      {% include 'snippets/task.html' %}
       </ul>
   {% else %}
       <p>No todos are available.</p>

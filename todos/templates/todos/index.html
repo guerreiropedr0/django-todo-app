@@ -3,7 +3,7 @@
 {% block content %}
   <form
     hx-post="{% url 'todos:create' %}"
-    hx-target="#task_list"
+    hx-target="#tasks_tbody"
     hx-swap="beforeend"
     hx-on::after-request="if(event.detail.successful) this.reset()"
   >
@@ -19,13 +19,22 @@
   </form>
 
   {% if task_list %}
-      <ul id="task_list">
-      {% for task in task_list %}
-        {% include 'snippets/task.html' %}
-      {% endfor %}
-      </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tasks_tbody">
+        {% for task in task_list %}
+          {% include 'snippets/task.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
   {% else %}
-      <p>No todos are available.</p>
+    <p>No todos are available.</p>
   {% endif %}
 {% endblock content %}
 

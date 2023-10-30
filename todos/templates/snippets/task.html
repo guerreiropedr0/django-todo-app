@@ -1,1 +1,14 @@
-<li>{{ task }}</li>
+<tr>
+  <th scope="row">{{ task }}</th>
+  <td>
+    {% if task.is_completed %}
+      Completed
+    {% else %}
+      Pending
+    {% endif %}
+  </td>
+  <td>
+    <button class="btn btn-secondary" type="button">Edit</button>
+    <button class="btn btn-danger" type="button">Delete</button>
+  </td>
+</tr>

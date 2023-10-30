@@ -1,6 +1,5 @@
-from django.http import HttpResponseRedirect
 from django.views import generic
-from django.urls import reverse
+from django.shortcuts import render
 
 from .models import Task
 from .forms import TaskForm
@@ -19,6 +18,6 @@ class IndexView(generic.ListView):
 def create(request):
   task = Task(description=request.POST['description'])
   task.save()
-  return HttpResponseRedirect(reverse("todos:index"))
+  return render(request, 'snippets/task.html', { "task": task })
 
   

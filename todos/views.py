@@ -4,8 +4,8 @@ from django.shortcuts import render
 from .models import Task
 from .forms import TaskForm
 
-class IndexView(generic.ListView):
-  template_name = "todos/index.html"
+class TaskList(generic.ListView):
+  template_name = "todos/task_list.html"
   model = Task
 
   def get_context_data(self, **kwargs):

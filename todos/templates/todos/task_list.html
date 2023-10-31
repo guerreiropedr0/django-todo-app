@@ -28,20 +28,3 @@
   <label for="task_deadline" class="form-label">Task Deadline</label>
   <input type="date" class="form-control" id="task_deadline" name="task_deadline">
 </div>
-
-<form
-hx-post="{% url 'todos:create' %}"
-hx-target="#tasks_tbody"
-hx-swap="beforeend"
-hx-on::after-request="if(event.detail.successful) this.reset()"
->
-{% csrf_token %}
-
-{% for field in form %}
-  <div class="mb-3">
-    <label for="{{ field.auto_id }}">{{ field.label }}</label>
-    {{ field }}
-  </div>
-{% endfor %}
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>

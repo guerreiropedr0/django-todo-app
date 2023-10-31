@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from .models import Task
 
@@ -15,3 +16,15 @@ class TaskCreate(generic.CreateView):
     self.object = form.save()
 
     return render(self.request, "snippets/task.html", { "task": self.object })
+  
+class TaskDelete(generic.DeleteView):
+    model = Task
+
+    def delete(self, request, *args, **kwargs):
+      self.object = self.get_object()
+
+
+      self.object.delete()
+
+      # Tells the client to render nothing (delete row)
+      return HttpResponse(status=200)

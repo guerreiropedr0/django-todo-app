@@ -9,6 +9,15 @@
   </div>
   <div class="col">
     <button class="btn btn-secondary" type="button">Edit</button>
-    <button class="btn btn-danger" type="button">Delete</button>
+    <button 
+      hx-delete="{% url 'todos:task-delete' task.id %}"
+      hx-target="closest div.row"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+      hx-confirm="Are you sure you wish to delete?"
+      class="btn btn-danger" 
+      type="button"
+    >
+      Delete
+    </button>
   </div>
 </div>

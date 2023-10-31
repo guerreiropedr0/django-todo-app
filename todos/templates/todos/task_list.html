@@ -8,7 +8,12 @@
         <div class="col">Status</div>
         <div class="col">Actions</div>
       </div>
-
+      <div 
+        hx-get="{% url 'todos:task-create' %}" 
+        hx-trigger="load"
+        hx-target="this"
+        hx-swap="outerHTML"
+      ></div>
       {% for task in task_list %}
         {% include 'snippets/task.html' %}
       {% endfor %}

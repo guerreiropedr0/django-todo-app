@@ -2,22 +2,16 @@ from django.views import generic
 from django.shortcuts import render
 
 from .models import Task
-from .forms import TaskForm
 
 class TaskList(generic.ListView):
   template_name = "todos/task_list.html"
   model = Task
 
-  def get_context_data(self, **kwargs):
-    # Call the base implementation first to get a context
-    context = super().get_context_data(**kwargs)
-    # Add in extra context
-    context["form"] = TaskForm()
-    return context
+class TaskCreate(generic.CreateView):
+  model = Task
+  fields = "__all__"
 
-def create(request):
-  task = Task(description=request.POST['description'])
-  task.save()
-  return render(request, 'snippets/task.html', { "task": task })
+  def form_valid(self, form):
+    self.object = form.save()
 
-  
+    return render(self.request, "snippets/task.html", { "task": self.object })

@@ -1,0 +1,18 @@
+<form
+  hx-post="{% url 'todos:task-create' %}"
+  hx-target="closest div"
+  hx-swap="beforeend"
+  hx-on::after-request="if(event.detail.successful) this.reset()"
+  class="row mb-2"
+>
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="col">
+      {{ field }}
+    </div>
+  {% endfor %}
+  <div class="col">
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form>

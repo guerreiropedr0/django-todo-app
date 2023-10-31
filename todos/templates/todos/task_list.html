@@ -1,41 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form
-    hx-post="{% url 'todos:create' %}"
-    hx-target="#tasks_tbody"
-    hx-swap="beforeend"
-    hx-on::after-request="if(event.detail.successful) this.reset()"
-  >
-    {% csrf_token %}
-
-    {% for field in form %}
-      <div class="mb-3">
-        <label for="{{ field.auto_id }}">{{ field.label }}</label>
-        {{ field }}
+  <div class="container">
+    {% if task_list %}
+      <div class="row mb-2 fw-bold">
+        <div class="col">Description</div>
+        <div class="col">Status</div>
+        <div class="col">Actions</div>
       </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
 
-  {% if task_list %}
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Description</th>
-          <th scope="col">Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="tasks_tbody">
-        {% for task in task_list %}
-          {% include 'snippets/task.html' %}
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>No todos are available.</p>
-  {% endif %}
+      {% for task in task_list %}
+        {% include 'snippets/task.html' %}
+      {% endfor %}
+    {% else %}
+      <p>No todos are available.</p>
+    {% endif %}
+  </div>
 {% endblock content %}
 
 {% comment %} TODO: Add deadline {% endcomment %}
@@ -43,3 +23,20 @@
   <label for="task_deadline" class="form-label">Task Deadline</label>
   <input type="date" class="form-control" id="task_deadline" name="task_deadline">
 </div>
+
+<form
+hx-post="{% url 'todos:create' %}"
+hx-target="#tasks_tbody"
+hx-swap="beforeend"
+hx-on::after-request="if(event.detail.successful) this.reset()"
+>
+{% csrf_token %}
+
+{% for field in form %}
+  <div class="mb-3">
+    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+    {{ field }}
+  </div>
+{% endfor %}
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>

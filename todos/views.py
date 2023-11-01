@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .models import Task
+from .forms import TaskForm
 
 class TaskList(generic.ListView):
   template_name = "todos/task_list.html"
@@ -10,7 +11,8 @@ class TaskList(generic.ListView):
 
 class TaskCreate(generic.CreateView):
   model = Task
-  fields = "__all__"
+  form_class = TaskForm
+
 
   def form_valid(self, form):
     self.object = form.save()
@@ -19,7 +21,7 @@ class TaskCreate(generic.CreateView):
   
 class TaskUpdate(generic.UpdateView):
   model = Task
-  fields = '__all__'  
+  form_class = TaskForm
   template_name_suffix = "_update_form"
 
   def form_valid(self, form):

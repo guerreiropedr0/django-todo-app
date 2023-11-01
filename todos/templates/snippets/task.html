@@ -8,6 +8,9 @@
     {% endif %}
   </div>
   <div class="col">
+    {{task.due_date}}
+  </div>
+  <div class="col">
     <button 
       hx-get="{% url 'todos:task-update' task.id %}"
       hx-target="closest div.row"

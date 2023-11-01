@@ -9,10 +9,13 @@ class TaskList(generic.ListView):
   template_name = "todos/task_list.html"
   model = Task
 
+class TaskDetail(generic.DetailView):
+  model = Task
+  template_name = "snippets/task.html"
+
 class TaskCreate(generic.CreateView):
   model = Task
   form_class = TaskForm
-
 
   def form_valid(self, form):
     self.object = form.save()

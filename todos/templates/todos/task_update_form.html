@@ -12,6 +12,15 @@
     </div>
   {% endfor %}
   <div class="col">
+    <button 
+      hx-get="{% url 'todos:task-detail' task.id %}"
+      hx-target="closest form"
+      hx-swap="outerHTML"
+      type="button" 
+      class="btn btn-secondary"
+    >
+      Cancel
+    </button>
     <button type="submit" class="btn btn-success">Save</button>
   </div>
 </form>

@@ -1,0 +1,17 @@
+<form
+  hx-post="{% url 'todos:task-update' task.id %}"
+  hx-target="this"
+  hx-swap="outerHTML"
+  class="row mb-2"
+>
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="col">
+      {{ field }}
+    </div>
+  {% endfor %}
+  <div class="col">
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
+</form>

@@ -8,7 +8,15 @@
     {% endif %}
   </div>
   <div class="col">
-    <button class="btn btn-secondary" type="button">Edit</button>
+    <button 
+      hx-get="{% url 'todos:task-update' task.id %}"
+      hx-target="closest div.row"
+      hx-swap="outerHTML"
+      class="btn btn-secondary" 
+      type="button"
+    >
+      Edit
+    </button>
     <button 
       hx-delete="{% url 'todos:task-delete' task.id %}"
       hx-target="closest div.row"

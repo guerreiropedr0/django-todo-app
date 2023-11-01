@@ -17,6 +17,16 @@ class TaskCreate(generic.CreateView):
 
     return render(self.request, "snippets/task.html", { "task": self.object })
   
+class TaskUpdate(generic.UpdateView):
+  model = Task
+  fields = '__all__'  
+  template_name_suffix = "_update_form"
+
+  def form_valid(self, form):
+    self.object = form.save()
+
+    return render(self.request, "snippets/task.html", { "task": self.object })
+
 class TaskDelete(generic.DeleteView):
     model = Task
 

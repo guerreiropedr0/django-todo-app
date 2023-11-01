@@ -9,6 +9,9 @@
   {% for field in form %}
     <div class="col">
       {{ field }}
+      {% for error in field.errors %}
+        <p class="text-danger">{{ error }}</p>
+      {% endfor %}
     </div>
   {% endfor %}
   <div class="col">
